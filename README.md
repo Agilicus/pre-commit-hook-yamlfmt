@@ -45,6 +45,7 @@ The default settings are:
 - `sequence`: 6 spaces
 - `offset`: 4 spaces
 - `colons`: do _not_ align top-level colons
+- `width`: 150 (max width 150 chars)
 
 Given this input:
 

@@ -51,6 +51,13 @@ class Cli:
             help="whether to align top-level colons",
             )
         parser.add_argument(
+            "-w",
+            "--width",
+            type=int,
+            default=150,
+            help="maximum line width",
+            )
+        parser.add_argument(
             "file_names",
             metavar="FILE_NAME",
             nargs="*",
@@ -65,14 +72,16 @@ class Formatter:
     Preserve comments.
     """
     def __init__(self, **kwargs):
-        yaml = YAML()
+        yaml = YAML(typ='rt')
         yaml.indent(
             mapping=kwargs.get("mapping", DEFAULT_INDENT["mapping"]),
             sequence=kwargs.get("sequence", DEFAULT_INDENT["sequence"]),
             offset=kwargs.get("offset", DEFAULT_INDENT["offset"]),
             )
         yaml.top_level_colon_align = kwargs.get("colons", False)
+        yaml.width = kwargs.get("width", 150)
         yaml.explicit_start = True
+        yaml.preserve_quotes = True
 
         self.yaml = yaml
         self.path = kwargs.get("path", None)
